@@ -1,0 +1,190 @@
+{
+  "info": {
+    "name": "Product Management API",
+    "description": "Postman collection for the Product Management Spring Boot assignment.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8081" }
+  ],
+  "item": [
+    {
+      "name": "GET All Products (sorted)",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            { "key": "username", "value": "employee" },
+            { "key": "password", "value": "employee123" }
+          ]
+        },
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/products?sort=price,asc",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products"],
+          "query": [{ "key": "sort", "value": "price,asc" }]
+        }
+      }
+    },
+    {
+      "name": "GET Product By Id",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            { "key": "username", "value": "employee" },
+            { "key": "password", "value": "employee123" }
+          ]
+        },
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/products/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products", "1"]
+        }
+      }
+    },
+    {
+      "name": "GET Products By Category",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            { "key": "username", "value": "employee" },
+            { "key": "password", "value": "employee123" }
+          ]
+        },
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/products/category/Electronics",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products", "category", "Electronics"]
+        }
+      }
+    },
+    {
+      "name": "POST Create Product",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            { "key": "username", "value": "manager" },
+            { "key": "password", "value": "manager123" }
+          ]
+        },
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Wireless Mouse\",\n  \"category\": \"Electronics\",\n  \"price\": 25.50,\n  \"quantity\": 100,\n  \"status\": \"AVAILABLE\",\n  \"active\": true,\n  \"code\": \"PRD-101\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/products",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products"]
+        }
+      }
+    },
+    {
+      "name": "PUT Update Product",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            { "key": "username", "value": "manager" },
+            { "key": "password", "value": "manager123" }
+          ]
+        },
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Wireless Mouse Pro\",\n  \"category\": \"Electronics\",\n  \"price\": 30.00,\n  \"quantity\": 80,\n  \"status\": \"AVAILABLE\",\n  \"active\": true,\n  \"code\": \"PRD-102\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/products/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products", "1"]
+        }
+      }
+    },
+    {
+      "name": "PATCH Partial Update Product",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            { "key": "username", "value": "manager" },
+            { "key": "password", "value": "manager123" }
+          ]
+        },
+        "method": "PATCH",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"quantity\": 50\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/products/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products", "1"]
+        }
+      }
+    },
+    {
+      "name": "DELETE Product (as ADMIN)",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            { "key": "username", "value": "admin" },
+            { "key": "password", "value": "admin123" }
+          ]
+        },
+        "method": "DELETE",
+        "url": {
+          "raw": "{{baseUrl}}/api/products/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products", "1"]
+        }
+      }
+    },
+    {
+      "name": "404 Test - Get Non-existing Product",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            { "key": "username", "value": "employee" },
+            { "key": "password", "value": "employee123" }
+          ]
+        },
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/products/9999",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products", "9999"]
+        }
+      }
+    },
+    {
+      "name": "403 Test - Employee Tries DELETE",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            { "key": "username", "value": "employee" },
+            { "key": "password", "value": "employee123" }
+          ]
+        },
+        "method": "DELETE",
+        "url": {
+          "raw": "{{baseUrl}}/api/products/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products", "1"]
+        }
+      }
+    }
+  ]
+}
